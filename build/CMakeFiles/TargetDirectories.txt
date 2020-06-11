@@ -1,0 +1,3 @@
+/root/System_Monitor/build/CMakeFiles/rebuild_cache.dir
+/root/System_Monitor/build/CMakeFiles/monitor.dir
+/root/System_Monitor/build/CMakeFiles/edit_cache.dir
