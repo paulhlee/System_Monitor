@@ -2,7 +2,7 @@
 #include <unistd.h>
 #include <string>
 #include <vector>
-
+#include <iostream>
 #include "linux_parser.h"
 
 using std::stof;
@@ -86,13 +86,14 @@ float LinuxParser::MemoryUtilization() {
     }
     }
   }
-  return totalmem-memfree; }
+  return (totalmem-memfree)/totalmem; }
 
 // TODO: Read and return the system uptime
 long LinuxParser::UpTime() { 
   string uptime, idletime;
   string line;
   std::ifstream stream(kProcDirectory + kUptimeFilename);
+  std::cout << "uptimesdsds";
   if (stream.is_open()){
     std::getline(stream,line);
     std::istringstream linestream(line);
@@ -100,6 +101,7 @@ long LinuxParser::UpTime() {
   }
   
   return std::stol(uptime, nullptr,10); }
+  // return 10323232;}
 
 // TODO: Read and return the number of jiffies for the system
 long LinuxParser::Jiffies() { return 0; }

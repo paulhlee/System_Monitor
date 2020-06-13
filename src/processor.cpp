@@ -21,7 +21,12 @@ float Processor::Utilization() {
     system >> idle >> iowait >> irq >> softirq 
     >> steal >> guest >> guest_nice); 
 
-
+    int usertime = user - guest;
+    int nicetime = nice - guest_nice;
+    int idealtime = idle + iowait;
+    int systemalltime = system + irq + softirq;
+    int virtualtime = guest + guest_nice;
+    int totaltime = usertime + nicetime + systemalltime + idealtime + steal + virtualtime;
     
     
-    return 0.0; }
+    return (float) totaltime; }
