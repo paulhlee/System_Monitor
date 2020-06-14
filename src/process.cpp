@@ -30,7 +30,7 @@ float Process::CpuUtilization() {
     std::getline(filestream,line);
    std::istringstream linestream(line);
     std::vector<std::string> results(std::istream_iterator<std::string>{linestream}, std::istream_iterator<std::string>());
-    
+
     float utime, stime, cutime, cstime, starttime;
     utime = std::stof(results[13]);
     stime = std::stof(results[14]);
@@ -38,9 +38,9 @@ float Process::CpuUtilization() {
     cstime = std::stof(results[16]);
     starttime = std::stof(results[21]);
     
-    float total_time = utime + stime;
-    float seconds = uptime - (starttime / sysconf(_SC_CLK_TCK));
-    return 100* ((total_time/sysconf(_SC_CLK_TCK))/seconds); }
+    float total_time = utime + stime+ cutime + cstime;
+    float seconds =UpTime() - starttime / sysconf(_SC_CLK_TCK);
+    return total_time/ sysconf(_SC_CLK_TCK)/seconds; }
 
 // TODO: Return the command that generated this process
 string Process::Command() { return command; }

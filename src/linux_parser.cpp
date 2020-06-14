@@ -184,8 +184,10 @@ string LinuxParser::Ram(int pid) {
         ram =value;
       }   }  }
   }
+  int mb = std::stoi(value)/1000;
+  string ramMB = std::to_string(mb);
 
-  return ram; }
+  return ramMB; }
 
 // TODO: Read and return the user ID associated with a process
 // REMOVE: [[maybe_unused]] once you define the function
@@ -235,6 +237,6 @@ long LinuxParser::UpTime(int pid) {
    std::istringstream linestream(line);
   std::vector<std::string> results(std::istream_iterator<std::string>{linestream}, std::istream_iterator<std::string>());
  
+  return std::stol(results[21]);
   
-  
-  return std::stol(results[21])/sysconf(_SC_CLK_TCK); }
+   }
