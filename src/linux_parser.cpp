@@ -4,6 +4,7 @@
 #include <vector>
 #include <iostream>
 #include "linux_parser.h"
+#include <unistd.h>
 
 using std::stof;
 using std::string;
@@ -159,7 +160,15 @@ int LinuxParser::RunningProcesses() {
 
 // TODO: Read and return the command associated with a process
 // REMOVE: [[maybe_unused]] once you define the function
-string LinuxParser::Command(int pid[[maybe_unused]]) { return string(); }
+string LinuxParser::Command(int pid[[maybe_unused]]) { 
+  string line;
+  std::ifstream filestream(kProcDirectory + std::to_string(pid) + kCmdlineFilename);
+  if(filestream.is_open()){
+    std::getline(filestream,line);
+
+  }
+  
+  return line; }
 
 // TODO: Read and return the memory used by a process
 // REMOVE: [[maybe_unused]] once you define the function
@@ -228,4 +237,4 @@ long LinuxParser::UpTime(int pid) {
  
   
   
-  return std::stol(results[21]); }
+  return std::stol(results[21])/sysconf(_SC_CLK_TCK); }
