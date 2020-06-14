@@ -93,14 +93,13 @@ long LinuxParser::UpTime() {
   string uptime, idletime;
   string line;
   std::ifstream stream(kProcDirectory + kUptimeFilename);
-  std::cout << "uptimesdsds";
   if (stream.is_open()){
     std::getline(stream,line);
     std::istringstream linestream(line);
     linestream >> uptime >> idletime;
   }
   
-  return std::stol(uptime, nullptr,10); }
+  return std::stol(uptime); }
   // return 10323232;}
 
 // TODO: Read and return the number of jiffies for the system
