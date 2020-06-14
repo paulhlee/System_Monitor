@@ -12,21 +12,24 @@ using std::vector;
 
 // TODO: Return the aggregate CPU utilization
 float Processor::Utilization() { 
-    string line, key;
+    string line, key, value, abc;
 
     std::ifstream filestream("/proc/stat");
     std::getline(filestream, line);
     std::istringstream linestream(line);
-    while(linestream >> user >> nice >> 
+    // linestream >> key >> value >> abc;
+    linestream >> key >> user >> nice >> 
     system >> idle >> iowait >> irq >> softirq 
-    >> steal >> guest >> guest_nice); 
+    >> steal >> guest >> guest_nice; 
 
-    int usertime = user - guest;
-    int nicetime = nice - guest_nice;
-    int idealtime = idle + iowait;
-    int systemalltime = system + irq + softirq;
-    int virtualtime = guest + guest_nice;
-    int totaltime = usertime + nicetime + systemalltime + idealtime + steal + virtualtime;
+    int usertime = std::stoi(user) - std::stoi(guest);
+    int nicetime = std::stoi(nice) - std::stoi(guest_nice);
+    int idealtime = std::stoi(idle) + std::stoi(iowait);
+    int systemalltime = std::stoi(system) + std::stoi(irq) + std::stoi(softirq);
+    int virtualtime = std::stoi(guest) + std::stoi(guest_nice);
+    int totaltime = usertime + nicetime + systemalltime + idealtime + std::stoi(steal) + virtualtime;
     
+
     
-    return (float) totaltime; }
+    return float((totaltime-idealtime)/((float) totaltime)); }
+    // return 0;}

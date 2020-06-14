@@ -1,5 +1,6 @@
 #ifndef PROCESSOR_H
 #define PROCESSOR_H
+#include <string>
 
 class Processor {
  public:
@@ -7,16 +8,16 @@ class Processor {
 
   // TODO: Declare any necessary private members
  private:
-    int user;
-    int nice;
-    int system;
-    int idle;
-    int iowait;
-    int irq;
-    int softirq;
-    int steal;
-    int guest;
-    int guest_nice;
+    std::string user;
+    std::string nice;
+    std::string system;
+    std::string idle;
+    std::string iowait;
+    std::string irq;
+    std::string softirq;
+    std::string steal;
+    std::string guest;
+    std::string guest_nice;
 };
 
 #endif

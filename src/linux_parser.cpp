@@ -123,12 +123,12 @@ int LinuxParser::TotalProcesses() {
 
   string line, key, value;
   int procs;
-  std::ifstream filestream(kProcDirectory + kMeminfoFilename);
+  std::ifstream filestream(kProcDirectory + kStatFilename);
     if (filestream.is_open()){
     while(std::getline(filestream,line)){
     std::istringstream linestream(line);
     while (linestream>> key>>value){
-      if (key == "processes:"){
+      if (key == "processes"){
         procs = std::stoi(value);
       }
 
@@ -142,12 +142,12 @@ int LinuxParser::TotalProcesses() {
 int LinuxParser::RunningProcesses() {
     string line, key, value;
   int procs;
-  std::ifstream filestream(kProcDirectory + kMeminfoFilename);
+  std::ifstream filestream(kProcDirectory + kStatFilename);
     if (filestream.is_open()){
     while(std::getline(filestream,line)){
     std::istringstream linestream(line);
     while (linestream>> key>>value){
-      if (key == "procs_running:"){
+      if (key == "procs_running"){
         procs = std::stoi(value);
       }
 
