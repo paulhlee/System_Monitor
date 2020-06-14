@@ -3,15 +3,23 @@
 #include <sstream>
 #include <string>
 #include <vector>
-
+#include "linux_parser.h"
 #include "process.h"
 
 using std::string;
 using std::to_string;
 using std::vector;
 
+Process::Process (int PID){
+    pid = PID;
+    uptime = LinuxParser::UpTime(PID);
+    ram = LinuxParser::Ram(PID);
+    
+};
+
+
 // TODO: Return this process's ID
-int Process::Pid() { return 0; }
+int Process::Pid() { return pid; }
 
 // TODO: Return this process's CPU utilization
 float Process::CpuUtilization() { return 0; }
