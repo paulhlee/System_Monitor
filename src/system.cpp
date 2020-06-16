@@ -14,6 +14,7 @@ using std::size_t;
 using std::string;
 using std::vector;
 
+
 // TODO: Return the system's CPU
 Processor& System::Cpu() { return cpu_; }
 
@@ -25,8 +26,14 @@ vector<Process>& System::Processes() {
         Process ProcessA(*it);
         processes_.push_back(ProcessA);
     }
+    // std::sort(processes_.begin(), processes_.end());
     return processes_; }
 
+System::System(){
+    cpu_ = Cpu();
+    processes_ = Processes();
+
+}
 // TODO: Return the system's kernel identifier (string)
 std::string System::Kernel() { return LinuxParser::Kernel(); }
 

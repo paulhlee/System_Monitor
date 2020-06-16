@@ -237,6 +237,6 @@ long LinuxParser::UpTime(int pid) {
    std::istringstream linestream(line);
   std::vector<std::string> results(std::istream_iterator<std::string>{linestream}, std::istream_iterator<std::string>());
  
-  return std::stol(results[21])/sysconf(_SC_CLK_TCK);
+  return UpTime() - std::stol(results[21])/sysconf(_SC_CLK_TCK);
   
    }
