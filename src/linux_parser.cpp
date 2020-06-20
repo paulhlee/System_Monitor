@@ -36,16 +36,17 @@ string LinuxParser::OperatingSystem() {
 
 // DONE: An example of how to read data from the filesystem
 string LinuxParser::Kernel() {
-  string os, kernel;
+  string os, kernel,version;// <----- Declared a new variable version 
   string line;
   std::ifstream stream(kProcDirectory + kVersionFilename);
   if (stream.is_open()) {
     std::getline(stream, line);
     std::istringstream linestream(line);
-    linestream >> os >> kernel;
+    linestream >> os >> kernel>>version;// <-- Extracting the version in a variable version
   }
-  return kernel;
+  return version;//<---- Return the third variable
 }
+
 
 // BONUS: Update this to use std::filesystem
 vector<int> LinuxParser::Pids() {
@@ -160,7 +161,7 @@ int LinuxParser::RunningProcesses() {
 
 // TODO: Read and return the command associated with a process
 // REMOVE: [[maybe_unused]] once you define the function
-string LinuxParser::Command(int pid[[maybe_unused]]) { 
+string LinuxParser::Command(int pid) { 
   string line;
   std::ifstream filestream(kProcDirectory + std::to_string(pid) + kCmdlineFilename);
   if(filestream.is_open()){
@@ -174,7 +175,6 @@ string LinuxParser::Command(int pid[[maybe_unused]]) {
 // REMOVE: [[maybe_unused]] once you define the function
 string LinuxParser::Ram(int pid) { 
   string line, key, value, ram;
-  int procs;
   std::ifstream filestream(kProcDirectory + std::to_string(pid) + kStatusFilename);
   if (filestream.is_open()){
     while(std::getline(filestream,line)){
@@ -193,7 +193,6 @@ string LinuxParser::Ram(int pid) {
 // REMOVE: [[maybe_unused]] once you define the function
 string LinuxParser::Uid(int pid) { 
   string line, key, value, uid;
-  int procs;
   std::ifstream filestream(kProcDirectory + std::to_string(pid) + kStatusFilename);
   if (filestream.is_open()){
     while(std::getline(filestream,line)){
@@ -231,7 +230,6 @@ string LinuxParser::User(int pid) {
 // REMOVE: [[maybe_unused]] once you define the function
 long LinuxParser::UpTime(int pid) { 
   string line, key, value, ram;
-  int procs;
   std::ifstream filestream(kProcDirectory + std::to_string(pid) + kStatFilename);
   std::getline(filestream,line);
    std::istringstream linestream(line);
